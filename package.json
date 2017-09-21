@@ -1,0 +1,69 @@
+{
+  "name": "hapi-app-ui",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Josh Peyton",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "concurrently \"nodemon server.js\" \"gulp local\"",
+    "gulp": "gulp",
+    "test": "lab",
+    "lint": "lab -dL",
+    "coverage": "npm test && open coverage.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshpeyton/hapi-app-ui.git"
+  },
+  "dependencies": {
+    "async": "^2.5.0",
+    "glue": "^4.2.0",
+    "handlebars": "^4.0.10",
+    "hapi": "^16.4.3",
+    "inert": "^4.2.1",
+    "joi": "^10.6.0",
+    "lodash": "^4.17.4",
+    "marko": "^4.4.17",
+    "vision": "^4.1.1",
+    "wreck": "^12.5.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.0",
+    "code": "^4.1.0",
+    "concurrently": "^3.5.0",
+    "del": "^2.0.2",
+    "eslint": "^4.6.1",
+    "eslint-config-walmart": "^1.2.4",
+    "eslint-plugin-filenames": "^1.2.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.8.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-declare": "^0.3.0",
+    "gulp-gzip": "^1.4.0",
+    "gulp-handlebars": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-jshint-xml-file-reporter": "^0.5.1",
+    "gulp-less": "^3.3.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-tar": "^2.0.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "gulp-wrap": "^0.13.0",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1",
+    "lab": "^14.2.2",
+    "merge-stream": "^1.0.1",
+    "nodemon": "^1.12.1"
+  },
+  "nodemonConfig": {
+    "verbose": true,
+    "ignore": [
+        "client/*",
+        "dist/*",
+        "temp/*",
+        "test/*"
+    ],
+    "ext": "js,json,hbs",
+    "watch": "server"
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "preCompileTemplates": true,
+    "srcDir": "client",
+    "jsDir": "client/js",
+    "lessDir": "client/less",
+    "templatesDir": "client/templates",
+    "build": [
+        {
+            "name": "main",
+            "js": [
+                "node_modules/handlebars/dist/handlebars.js",
+                "temp/js/templates.js",
+                "client/js/main.js"
+            ],
+            "css": [
+                "client/less/build.less"
+            ]
+        }
+    ],
+    "cssOutputDir": "dist/css",
+    "jsOutputDir": "dist/js"
+}

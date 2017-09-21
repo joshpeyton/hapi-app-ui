@@ -1,0 +1,18 @@
+{
+    "extends": [
+        "walmart/configurations/es6-node"
+    ],
+    "rules": {
+        "no-invalid-this": "off",
+        "indent": ["error", 4],
+        "max-len": "off",
+        "max-statements": "off",
+        "max-params": "off",
+        "no-lonely-if": "off",
+        "complexity": "off",
+        "no-extra-parens": "off",
+        "no-magic-numbers": "off",
+        "filenames/match-regex": "off",
+        "max-nested-callbacks": "off"
+    }
+}

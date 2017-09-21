@@ -1,0 +1,10 @@
+        </div>{{!-- End Wrapper --}}
+        
+    {{!-- Include CDN JS Files --}}
+    {{#each cdn.js}}
+        <script src="{{this}}"></script>
+    {{/each}}
+        {{!-- Include App JS File --}}
+        <script src="{{cdn.url}}js/{{siteName}}.min.js"></script>
+    </body>
+</html>

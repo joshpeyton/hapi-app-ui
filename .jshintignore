@@ -1,0 +1,7 @@
+server/**/*.js
+test/**/*.js
+dist/**/*.js
+server.js
+manifest.js
+gulpfile.js
+.labrc.js

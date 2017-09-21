@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, user-scalable=yes, minimum-scale=1.0,initial-scale=1.0">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta description="{{metaDescription}}" />
+
+        <title>{{ page.title }}</title>
+        
+        {{!-- Include CDN CSS Files --}}
+        {{#each cdn.css}}
+            <link href="{{this}}" rel="stylesheet" type="text/css" />
+        {{/each}}
+
+        {{!-- Include App CSS File --}}
+        <link href="{{cdn.url}}css/{{siteName}}.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+        {{!-- Start Wrapper --}}
+        <div id="wrapper">

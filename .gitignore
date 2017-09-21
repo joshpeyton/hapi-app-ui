@@ -1,0 +1,13 @@
+.DS_Store
+node_modules/
+bower_components/
+*.log
+.idea/
+*.iml
+dist/
+coverage.html
+clover.xml
+junit.xml
+jshint*.xml
+/temp/
+*.heapsnapshot
