@@ -21,11 +21,10 @@
     "handlebars": "^4.0.10",
     "hapi": "^16.4.3",
     "inert": "^4.2.1",
-    "joi": "^10.6.0",
+    "joi": "^11.0.3",
     "lodash": "^4.17.4",
-    "marko": "^4.4.17",
     "vision": "^4.1.1",
-    "wreck": "^12.5.0"
+    "wreck": "^13.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.0",
@@ -58,10 +57,10 @@
   "nodemonConfig": {
     "verbose": true,
     "ignore": [
-        "client/*",
-        "dist/*",
-        "temp/*",
-        "test/*"
+      "client/*",
+      "dist/*",
+      "temp/*",
+      "test/*"
     ],
     "ext": "js,json,hbs",
     "watch": "server"
