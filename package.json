@@ -28,9 +28,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.0.0",
-    "code": "^4.1.0",
+    "code": "^5.1.0",
     "concurrently": "^3.5.0",
-    "del": "^2.0.2",
+    "del": "^3.0.0",
     "eslint": "^4.6.1",
     "eslint-config-walmart": "^1.2.4",
     "eslint-plugin-filenames": "^1.2.0",
