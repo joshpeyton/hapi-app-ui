@@ -1,5 +1,5 @@
 "use strict";
-const Gulp = require('gulp');
+const Gulp = require("gulp");
 const path = require("path");
 const Handlebars = require("handlebars");
 const handlebars = require("gulp-handlebars");
@@ -18,12 +18,12 @@ const jshintStylish = require("jshint-stylish");
 const tar = require("gulp-tar");
 const gzip = require("gulp-gzip");
 
-let buildConfig = require("./build.json");
+const buildConfig = require("./build.json");
 const appName = require("./package.json").name;
 
-const buildGulp = (gulp, buildConfig) => {
-    const cssOutputDir = buildConfig.cssOutputDir;
-    const jsOutputDir = buildConfig.jsOutputDir;
+const buildGulp = (gulp, build) => {
+    const cssOutputDir = build.cssOutputDir;
+    const jsOutputDir = build.jsOutputDir;
 
     gulp.task("clean", (next) => {
         // You can use multiple globbing patterns as you would with `gulp.src`
@@ -58,7 +58,7 @@ const buildGulp = (gulp, buildConfig) => {
                 .pipe(concat("templates.js"))
                 .pipe(gulp.dest("temp/js/"));
         } else {
-            return;
+            return; // eslint-disable-line consistent-return
         }
     });
 
@@ -112,7 +112,7 @@ const buildGulp = (gulp, buildConfig) => {
                     .pipe(gulp.dest(jsOutputDir))
                     .pipe(uglify())
                     .on("error", (err) => {
-                        console.log(err.message);
+                        console.log(err.message); // eslint-disable-line no-console
                     })
                     .pipe(rename({suffix: ".min"}))
                     .pipe(gulp.dest(jsOutputDir));
@@ -122,7 +122,7 @@ const buildGulp = (gulp, buildConfig) => {
                 gulp.src(page.css)
                     .pipe(less())
                     .on("error", (err) => {
-                        console.log(err.message);
+                        console.log(err.message); // eslint-disable-line no-console
                     })
                     .pipe(rename({
                         basename: appName
@@ -147,7 +147,7 @@ const buildGulp = (gulp, buildConfig) => {
     return gulp;
 };
 
-let gulp = buildGulp(Gulp, buildConfig);
+const gulp = buildGulp(Gulp, buildConfig);
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['ci']);
+gulp.task("default", ["ci"]);

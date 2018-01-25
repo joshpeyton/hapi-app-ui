@@ -1,5 +1,3 @@
-bower_components/**/*.js
 client/**/*.js
 dist/**/*.js
 temp/**/*.js
-gulpfile.js
