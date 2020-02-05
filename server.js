@@ -31,6 +31,11 @@ const compose = (callback) => {
 if (!module.parent) {
     compose();
 }
+
+process.once("uncaughtException", (err) => {
+    throw err;
+});
+
 // $lab:coverage:on$
 
 module.exports = compose;

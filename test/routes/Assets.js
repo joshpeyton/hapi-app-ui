@@ -21,20 +21,18 @@ describe("Asset Routes", () => {
     const jsRoutes = [
         {
             name: "Route for JS Assets",
-            url: "/static/js/hapi-app.js"
+            url: "/static/js/hapi-app-ui.js"
         }
     ];
 
     const cssRoutes = [
         {
             name: "Route for CSS Assets",
-            url: "/static/css/hapi-app.css"
+            url: "/static/css/hapi-app-ui.css"
         }
     ];
 
     before((done) => {
-        process.env.bcp_host = "bcptest.lowes.com";
-        process.env.services_host = "service.lowes.com";
 
         applicationServer((err, obj) => {
             server = obj;
