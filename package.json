@@ -1,8 +1,9 @@
 {
   "name": "hapi-app-ui",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "server.js",
   "author": "Josh Peyton",
+  "license": "MIT",
   "scripts": {
     "start": "node index.js",
     "startwatch": "nodemon index.js",
@@ -36,7 +37,7 @@
     "@hapi/code": "^8.0.1",
     "@hapi/lab": "^22.0.3",
     "babel-eslint": "^10.0.3",
-    "concurrently": "^3.5.0",
+    "concurrently": "^5.1.0",
     "del": "^5.1.0",
     "eslint": "^6.8.0",
     "eslint-config-walmart": "^2.2.1",
@@ -52,7 +53,7 @@
     "gulp-less": "^4.0.1",
     "gulp-rename": "^2.0.0",
     "gulp-tar": "^3.1.0",
-    "gulp-uglify": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
     "gulp-wrap": "^0.15.0",
     "jshint": "^2.11.0",
     "jshint-stylish": "^2.2.1",
