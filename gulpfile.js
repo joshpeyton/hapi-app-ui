@@ -81,7 +81,7 @@ const buildGulp = (gulp, build) => {
             }));
     };
 
-    ci = () => {
+    ci = cb => {
         for (let i = 0, j = buildConfig.build.length; i < j; ++i) {
             const page = buildConfig.build[i];
 
@@ -106,6 +106,8 @@ const buildGulp = (gulp, build) => {
                     .pipe(gulp.dest(cssOutputDir));
             }
         }
+
+        cb();
     };
 
     local = cb => {
@@ -158,7 +160,7 @@ const buildGulp = (gulp, build) => {
         gulp.watch([`${buildConfig.jsDir}/**/*.js`, `${buildConfig.lessDir}/**/*.less`, `${buildConfig.templatesDir}/**/*.hbs`], gulp.series(clean, generatetemplates, jslint, local));
     };
     exports.buildArtifact = buildArtifact;
-    exports.default = ci;
+    exports.default = gulp.series(clean, generatetemplates, jslint, ci);
 
     return gulp;
 };
