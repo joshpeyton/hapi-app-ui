@@ -1,7 +1,7 @@
 "use strict";
-const Code = require("code");
+const Code = require("@hapi/code");
 const expect = Code.expect;
-const Lab = require("lab");
+const Lab = require("@hapi/lab");
 const lab = exports.lab = Lab.script();
 const describe = lab.describe;
 const it = lab.it;
@@ -9,13 +9,13 @@ const before = lab.before;
 // const after = lab.after;
 // const beforeEach = lab.beforeEach;
 // const afterEach = lab.afterEach;
-// const nock = require("nock");
+// const nock = require("nock"); // Use nock for testing external apis
 const _ = require("lodash");
 
-const applicationServer = require("../../");
+const { init } = require("../../server");
 
 describe("Asset Routes", () => {
-    // let nocks;
+
     let server;
 
     const jsRoutes = [
@@ -32,49 +32,45 @@ describe("Asset Routes", () => {
         }
     ];
 
-    before((done) => {
+    before(async () => {
 
-        applicationServer((err, obj) => {
-            server = obj;
-            done();
-        });
+
+        server = await init();
+
     });
 
     describe("Successful Asset Load", () => {
 
-        _.each(jsRoutes, (route) => {
+        _.each(jsRoutes, route => {
             const url = route.url;
 
             describe(`When ${route.name} is requested`, () => {
-                it("should return a 200 HTTP Code with content-type set to application/javascript", (done) => {
-                    server.inject({
+                it("should return a 200 HTTP Code with content-type set to application/javascript", async () => {
+                    await server.inject({
                         url,
                         method: "get"
-                    }, (response) => {
+                    }, response => {
 
                         expect(response.statusCode).to.equal(200);
                         expect(response.headers["content-type"]).to.equal("application/javascript; charset=utf-8");
-
-                        done();
                     });
                 });
             });
         });
 
-        _.each(cssRoutes, (route) => {
+        _.each(cssRoutes, route => {
             const url = route.url;
 
             describe(`When ${route.name} is requested`, () => {
-                it("should return a 200 HTTP Code with content-type set to text/css", (done) => {
-                    server.inject({
+                it("should return a 200 HTTP Code with content-type set to text/css", async () => {
+                    await server.inject({
                         url,
                         method: "get"
-                    }, (response) => {
+                    }, response => {
 
                         expect(response.statusCode).to.equal(200);
                         expect(response.headers["content-type"]).to.equal("text/css; charset=utf-8");
 
-                        done();
                     });
                 });
             });
@@ -85,15 +81,14 @@ describe("Asset Routes", () => {
         const url = "/css/hapi-app.css";
 
         describe("When a bad route is requested", () => {
-            it("should return a 404 HTTP Code", (done) => {
-                server.inject({
+            it("should return a 404 HTTP Code", async () => {
+                await server.inject({
                     url,
                     method: "get"
-                }, (response) => {
+                }, response => {
 
                     expect(response.statusCode).to.equal(404);
 
-                    done();
                 });
             });
         });
