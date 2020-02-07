@@ -11,6 +11,10 @@
     "lint": "lab -dL",
     "coverage": "npm test && open coverage.html"
   },
+  "engines": {
+    "node": ">=8.0.0 <9.0.0",
+    "npm": ">=5"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/joshpeyton/hapi-app-ui.git"
@@ -27,13 +31,15 @@
     "wreck": "^13.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "^8.2.3",
     "code": "^5.1.0",
     "concurrently": "^3.5.0",
     "del": "^3.0.0",
     "eslint": "^4.6.1",
+    "eslint-config-hapi": "10.0.0",
     "eslint-config-walmart": "^1.2.4",
     "eslint-plugin-filenames": "^1.2.0",
+    "eslint-plugin-hapi": "4.0.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.8.0",
     "gulp-concat": "^2.6.1",
@@ -47,11 +53,12 @@
     "gulp-tar": "^2.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
-    "gulp-wrap": "^0.13.0",
+    "gulp-wrap": "^0.14.0",
     "jshint": "^2.9.5",
     "jshint-stylish": "^2.2.1",
-    "lab": "^14.2.2",
+    "lab": "^14.3.4",
     "merge-stream": "^1.0.1",
+    "nock": "^9.0.2",
     "nodemon": "^1.12.1"
   },
   "nodemonConfig": {

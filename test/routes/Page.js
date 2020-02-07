@@ -26,8 +26,6 @@ describe("Page Routes", () => {
     ];
 
     before((done) => {
-        process.env.bcp_host = "bcptest.lowes.com";
-        process.env.services_host = "service.lowes.com";
 
         applicationServer((err, obj) => {
             server = obj;
