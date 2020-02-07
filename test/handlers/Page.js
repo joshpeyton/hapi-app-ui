@@ -1,18 +1,17 @@
 "use strict";
-const Code = require("code");
+const Code = require("@hapi/code");
 const expect = Code.expect;
-const Lab = require("lab");
+const Lab = require("@hapi/lab");
 const lab = exports.lab = Lab.script();
 const describe = lab.describe;
-// const before = lab.before;
 const it = lab.it;
 
 const PageHandlerImpl = require("../../server/app/handlers/page.js");
 
 const thisObj = {
-    "global": {
-        "cdn": {},
-        "isProd": false
+    global: {
+        cdn: {},
+        isProd: false
     }
 };
 
@@ -35,11 +34,10 @@ const replyObj = {
 };
 
 describe("Page Handler", () => {
-    it("context should be an object", (done) => {
+    it("context should be an object", async () => {
         const context = PageHandlerImpl.apply(thisObj, [optionsObj, serverObj, requestObj, replyObj]);
 
         expect(context).to.be.object();
 
-        done();
     });
 });

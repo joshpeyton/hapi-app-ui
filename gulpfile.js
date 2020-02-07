@@ -21,16 +21,22 @@ const gzip = require("gulp-gzip");
 const buildConfig = require("./build.json");
 const appName = require("./package.json").name;
 
+let clean;
+let generatetemplates;
+let jslint;
+let local;
+let ci;
+let buildArtifact;
+
 const buildGulp = (gulp, build) => {
     const cssOutputDir = build.cssOutputDir;
     const jsOutputDir = build.jsOutputDir;
 
-    gulp.task("clean", (next) => {
-        // You can use multiple globbing patterns as you would with `gulp.src`
-        return del(["./dist/**"], next);
-    });
+    clean = cb => {
+        return del(["./dist/**"], cb);
+    };
 
-    gulp.task("templates", ["clean"], () => {
+    generatetemplates = () => {
         if (typeof buildConfig.preCompileTemplates !== "undefined" && buildConfig.preCompileTemplates === true) {
             const partials = gulp.src(`${buildConfig.templatesDir}/partials/**/*.hbs`)
                 .pipe(handlebars({
@@ -38,7 +44,7 @@ const buildGulp = (gulp, build) => {
                 }))
                 .pipe(wrap("Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));", {}, {
                     imports: {
-                        processPartialName: (fileName) => {
+                        processPartialName: fileName => {
                             return JSON.stringify(path.basename(fileName, ".js"));
                         }
                     }
@@ -60,9 +66,9 @@ const buildGulp = (gulp, build) => {
         } else {
             return; // eslint-disable-line consistent-return
         }
-    });
+    };
 
-    gulp.task("jslint", () => {
+    jslint = () => {
         // Lint the things...
         return gulp.src(`${buildConfig.jsDir}/**/*.js`)
             .pipe(jshint())
@@ -73,9 +79,9 @@ const buildGulp = (gulp, build) => {
                 filePath: "./jshint.xml",
                 alwaysReport: true
             }));
-    });
+    };
 
-    gulp.task("ci", ["templates", "jslint"], () => {
+    ci = () => {
         for (let i = 0, j = buildConfig.build.length; i < j; ++i) {
             const page = buildConfig.build[i];
 
@@ -100,9 +106,9 @@ const buildGulp = (gulp, build) => {
                     .pipe(gulp.dest(cssOutputDir));
             }
         }
-    });
+    };
 
-    gulp.task("local", ["templates", "jslint"], () => {
+    local = cb => {
         for (let i = 0, j = buildConfig.build.length; i < j; ++i) {
             const page = buildConfig.build[i];
 
@@ -111,7 +117,7 @@ const buildGulp = (gulp, build) => {
                     .pipe(concat(`${appName}.js`))
                     .pipe(gulp.dest(jsOutputDir))
                     .pipe(uglify())
-                    .on("error", (err) => {
+                    .on("error", err => {
                         console.log(err.message); // eslint-disable-line no-console
                     })
                     .pipe(rename({suffix: ".min"}))
@@ -121,7 +127,7 @@ const buildGulp = (gulp, build) => {
             if (page.css.length) {
                 gulp.src(page.css)
                     .pipe(less())
-                    .on("error", (err) => {
+                    .on("error", err => {
                         console.log(err.message); // eslint-disable-line no-console
                     })
                     .pipe(rename({
@@ -134,20 +140,27 @@ const buildGulp = (gulp, build) => {
             }
         }
 
-        gulp.watch([`${buildConfig.jsDir}/**/*.js`, `${buildConfig.lessDir}/**/*.less`, `${buildConfig.templatesDir}/**/*.hbs`], ["local"]);
-    });
+        cb();
+    };
 
-    gulp.task("buildArtifact", () =>
+    buildArtifact = () => {
         gulp.src(["**/*", "!.git/**"])
             .pipe(tar(`${buildConfig.artifactName}.tar`))
             .pipe(gzip())
-            .pipe(gulp.dest("."))
-    );
+            .pipe(gulp.dest("."));
+    };
+
+    exports.clean = clean;
+    exports.generatetemplates = gulp.series(clean, generatetemplates);
+    exports.jslint = jslint;
+    exports.ci = gulp.series(clean, generatetemplates, jslint, ci);
+    exports.local = () => {
+        gulp.watch([`${buildConfig.jsDir}/**/*.js`, `${buildConfig.lessDir}/**/*.less`, `${buildConfig.templatesDir}/**/*.hbs`], gulp.series(clean, generatetemplates, jslint, local));
+    };
+    exports.buildArtifact = buildArtifact;
+    exports.default = ci;
 
     return gulp;
 };
 
-const gulp = buildGulp(Gulp, buildConfig);
-
-// The default task (called when you run `gulp` from cli)
-gulp.task("default", ["ci"]);
+buildGulp(Gulp, buildConfig);

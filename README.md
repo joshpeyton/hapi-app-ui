@@ -3,11 +3,11 @@ This is a base Hapi.js UI application for Node.js using Handlebars for server si
 
 ## Assumptions
 #### Important
-- Node 8 installed
-- NPM installed
+- Node >=12 installed (Codebase updated using v12.14.1)
+- NPM >=6 installed
 
 #### Code Quality
-- IDE has plugins installed for jshint, eslint, editorconfig
+- Have IDE plugins installed for jshint, eslint, editorconfig
 
 ## Stack
 
@@ -30,7 +30,7 @@ Note: For a detailed list of the toolsets used, please refer to [package.json](p
 |        |   |-- helpers    // Handlebar helpers
 |        |   |-- partials   // Handlebar partials
 |        |   |-- templates  // Handlebar templates
-|        |-- index.js       // Application starting point
+|        |-- index.js       // Setup for views
 |
 |    |-- app-services
 |    |   |-- index.js       // Setup for services consumed
@@ -53,7 +53,7 @@ Note: For a detailed list of the toolsets used, please refer to [package.json](p
 ## Running the server locally
 
  - Install  `node`, `npm`
- - Run these commands
+ - Commands
 
 ```sh
 # Install dependencies

@@ -9,44 +9,35 @@
  */
 
 const manifest = {
-    "registrations": [
-        {
-            "plugin": {
-                "register": "vision"
+    register: {
+        plugins: [
+            {
+                plugin: "@hapi/vision"
+            },
+            {
+                plugin: "@hapi/inert"
+            },
+            {
+                plugin: "./app-services"
+            },
+            {
+                plugin: "./app"
             }
-        },
-        {
-            "plugin": {
-                "register": "inert"
-            }
-        },
-        {
-            "plugin": {
-                "register": "./app-services"
-            }
-        },
-        {
-            "plugin": {
-                "register": "./app"
-            }
-        }
-    ]
+        ]
+    }
 };
 
 /**
  * Server Config
  */
 manifest.server = manifest.server || {};
-manifest.connections = [
-    {
-        "port": process.env.PORT || 3000,
-        "host": process.env.HOST || "localhost"
-    }
-];
+manifest.server.port = process.env.PORT || 3000;
+manifest.server.host = process.env.HOST || "localhost";
+
 
 manifest.server.app = manifest.server.app || {};
 manifest.server.app.environment = process.env.environment || "development";
-manifest.server.app.generic_error_page_url = process.env.generic_error_page_url || "/404";
+manifest.server.app.genericErrorPageUrl = process.env.generic_error_page_url || "/404";
 
 /**
  * Services Config
