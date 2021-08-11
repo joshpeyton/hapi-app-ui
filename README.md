@@ -3,7 +3,7 @@ This is a base Hapi.js UI application for Node.js using Handlebars for server si
 
 ## Assumptions
 #### Important
-- Node >=12 installed (Codebase updated using v12.14.1)
+- Node >=14 installed (Codebase updated using v14.17.4)
 - NPM >=6 installed
 
 #### Code Quality
